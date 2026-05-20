@@ -17,6 +17,16 @@
       },
       "streamSettings": {
         "network": "ws",
+        "security": "tls",
+        "tlsSettings": {
+          "certificates": [
+            {
+              "certificateFile": "/etc/xray/cert.pem",
+              "keyFile": "/etc/xray/key.pem"
+            }
+          ],
+          "serverName": "${SNI}"
+        },
         "wsSettings": {
           "path": "/"
         }
@@ -31,19 +41,6 @@
     {
       "protocol": "freedom",
       "tag": "direct"
-    },
-    {
-      "protocol": "blackhole",
-      "tag": "block"
     }
-  ],
-  "routing": {
-    "rules": [
-      {
-        "type": "field",
-        "outboundTag": "block",
-        "protocol": ["bittorrent"]
-      }
-    ]
-  }
+  ]
 }
